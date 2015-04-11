@@ -19,8 +19,8 @@ window.onload = function() {
     $( "select option:selected" ).each(function() {
       BasicGame.PLAYER_SPRITE = $( this ).val();
       //  Now start the Boot state.
-      game.state.start('Boot');
-      // game.state.start('Game');
+      // game.state.start('Boot');
+      game.state.start('Game');
     });
   })
   .change();

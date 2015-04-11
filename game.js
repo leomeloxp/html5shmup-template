@@ -41,35 +41,35 @@ BasicGame.Game.prototype = {
     /* Creates the game objects (ideally with already loaded assets) */
     create: function () {
 
-        this.setupBackground();
-        this.setupPlayer();
-        this.setupEnemies();
-        this.setupBullets();
-        this.setupExplosions();
-        this.setupPlayerIcons();
-        this.setupText();
+        // this.setupBackground();
+        // this.setupPlayer();
+        // this.setupEnemies();
+        // this.setupBullets();
+        // this.setupExplosions();
+        // this.setupPlayerIcons();
+        // this.setupText();
 
-        //this.setupAudio();
+        // //this.setupAudio();
 
-        // Implement keyboard control with arrow keys
-        this.cursors = this.input.keyboard.createCursorKeys();
+        // // Implement keyboard control with arrow keys
+        // this.cursors = this.input.keyboard.createCursorKeys();
 
     },
 
     update: function () {
-        this.checkCollisions();
-        this.spawnEnemies();
-        this.enemyFire();
-        this.processPlayerInput();
-        this.processDelayedEffects();
+        // this.checkCollisions();
+        // this.spawnEnemies();
+        // this.enemyFire();
+        // this.processPlayerInput();
+        // this.processDelayedEffects();
     },
 
 
     render: function () {
-        // Enable debugging
-        //this.game.debug.body(this.bullet);
-        //this.game.debug.body(this.enemy);
-        //this.game.debug.body(this.player);
+        // // Enable debugging
+        // this.game.debug.body(this.bullet);
+        // this.game.debug.body(this.enemy);
+        // this.game.debug.body(this.player);
 
     },
 
@@ -441,26 +441,14 @@ BasicGame.Game.prototype = {
         } else if (this.cursors.right.isDown) {
             this.player.body.velocity.x = this.player.speed;
         }
-        // Horizontal Move AD
-        if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
-            this.player.body.velocity.x = -this.player.speed;
-        } else if (this.input.keyboard.isDown(Phaser.Keyboard.D)) {
-            this.player.body.velocity.x = this.player.speed;
-        }
-
+        
         // Vertical Move Arrows
         if (this.cursors.up.isDown) {
             this.player.body.velocity.y = -this.player.speed;
         } else if (this.cursors.down.isDown) {
             this.player.body.velocity.y = this.player.speed;
         }
-        // Vertical Move WS
-        if (this.input.keyboard.isDown(Phaser.Keyboard.W)) {
-            this.player.body.velocity.y = -this.player.speed;
-        } else if (this.input.keyboard.isDown(Phaser.Keyboard.S)) {
-            this.player.body.velocity.y = this.player.speed;
-        }
-
+        
         // Implement Mouse and Touch movement
         if (this.input.activePointer.isDown &&
             this.physics.arcade.distanceToPointer(this.player) > 15) { //Fixes trembling sprite caused by movement overshoot
