@@ -22,45 +22,43 @@ BasicGame.Preloader.prototype = {
     //  What that does is automatically crop the sprite from 0 to full-width
     //  as the files below are loaded in.
     this.load.setPreloadSprite(this.preloadBar);
-
-    //  Here we load the rest of the assets our game needs.
+    
+    // Let's load the homepage before moving on to the other assets.
     this.load.image('titlepage', 'assets/titlepage.png');
-    this.load.image('sea', 'assets/sea.png');
-    this.load.image('bullet', 'assets/bullet.png');
-    this.load.image('enemyBullet', 'assets/enemy-bullet.png');
-    this.load.image('powerup1', 'assets/powerup1.png');
-    this.load.spritesheet('greenEnemy', 'assets/enemy.png', 32, 32);
-    this.load.spritesheet('whiteEnemy', 'assets/shooting-enemy.png', 32, 32);
-    this.load.spritesheet('boss', 'assets/boss.png', 93, 75);
-    this.load.spritesheet('explosion', 'assets/explosion.png', 32, 32);
-    this.load.spritesheet('player', 'assets/player'+BasicGame.PLAYER_SPRITE+'.png', 64, 64);
-    this.load.audio('explosion', ['assets/explosion.ogg', 'assets/explosion.wav']);
-    this.load.audio('playerExplosion', ['assets/player-explosion.ogg', 'assets/player-explosion.wav']);
-    this.load.audio('enemyFire', ['assets/enemy-fire.ogg', 'assets/enemy-fire.wav']);
-    this.load.audio('playerFire', ['assets/player-fire.ogg', 'assets/player-fire.wav']);
-    this.load.audio('powerUp', ['assets/powerup.ogg', 'assets/powerup.wav']);
-    // Load any other assets you add into your game follwing the same pattern
-      //this.load.audio('titleMusic', ['audio/main_menu.mp3']);
 
+//    // Here we load the rest of the assets our game needs.
+//    // Phase 1 assets
+//    this.load.image('sea', 'assets/sea.png');
+//    this.load.spritesheet('player', 'assets/player'+BasicGame.PLAYER_SPRITE+'.png', 64, 64);
+//    this.load.spritesheet('greenEnemy', 'assets/enemy.png', 32, 32);
+//    this.load.spritesheet('whiteEnemy', 'assets/shooting-enemy.png', 32, 32);
+//    this.load.image('bullet', 'assets/bullet.png');
+//    this.load.spritesheet('explosion', 'assets/explosion.png', 32, 32);
+//    this.load.image('enemyBullet', 'assets/enemy-bullet.png');
+//    
+//    // Phase 2 assets
+//    this.load.image('powerup1', 'assets/powerup1.png');
+//    this.load.spritesheet('boss', 'assets/boss.png', 93, 75);
+//    
+//    // Phase 3 assets
+//    this.load.audio('explosion', ['assets/explosion.ogg', 'assets/explosion.wav']);
+//    this.load.audio('playerExplosion', ['assets/player-explosion.ogg', 'assets/player-explosion.wav']);
+//    this.load.audio('enemyFire', ['assets/enemy-fire.ogg', 'assets/enemy-fire.wav']);
+//    this.load.audio('playerFire', ['assets/player-fire.ogg', 'assets/player-fire.wav']);
+//    this.load.audio('powerUp', ['assets/powerup.ogg', 'assets/powerup.wav']);
+    // Load any other assets you add into your game follwing the same pattern
   },
 
   create: function () {
 
-    //  Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes
+    //  Once the load has finished we disable the crop in case there's anything else we want to load or decode later.
     this.preloadBar.cropEnabled = false;
 
   },
-
   update: function () {
-
-    // If you wish to play with sound, uncomment this if block
-    //if (this.cache.isSoundDecoded('titleMusic') && this.ready == false)
-    //{
-    //  this.ready = true;
-      //Then we move to the Mainmenu
-      this.state.start('MainMenu');
-    //}
-
+//    // If you want to skip the Main menu and start the game directly uncomment the next line
+//    this.state.start('Game');
+//    // Then we move to the Mainmenu
+    this.state.start('MainMenu');
   }
-
 };

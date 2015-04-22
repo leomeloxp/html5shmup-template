@@ -4,63 +4,32 @@ BasicGame.Game = function (game) {
 
 BasicGame.Game.prototype = {
     
-    // preload: function () {
-
-    // //  Show the loading progress bar asset we loaded in boot.js
-    // this.stage.backgroundColor = '#2d2d2d';
-
-    // this.preloadBar = this.add.sprite(this.game.width / 2 - 100, this.game.height / 2, 'preloaderBar');
-    // this.add.text(this.game.width / 2, this.game.height / 2 - 30, "Loading...", { font: "32px monospace", fill: "#fff" }).anchor.setTo(0.5, 0.5);
-
-    // //  This sets the preloadBar sprite as a loader sprite.
-    // //  What that does is automatically crop the sprite from 0 to full-width
-    // //  as the files below are loaded in.
-    // this.load.setPreloadSprite(this.preloadBar);
-
-    // //  Here we load the rest of the assets our game needs.
-    // this.load.image('titlepage', 'assets/titlepage.png');
-    // this.load.image('sea', 'assets/sea.png');
-    // this.load.image('bullet', 'assets/bullet.png');
-    // this.load.image('enemyBullet', 'assets/enemy-bullet.png');
-    // this.load.image('powerup1', 'assets/powerup1.png');
-    // this.load.spritesheet('greenEnemy', 'assets/enemy.png', 32, 32);
-    // this.load.spritesheet('whiteEnemy', 'assets/shooting-enemy.png', 32, 32);
-    // this.load.spritesheet('boss', 'assets/boss.png', 93, 75);
-    // this.load.spritesheet('explosion', 'assets/explosion.png', 32, 32);
-    // this.load.spritesheet('player', 'assets/player'+BasicGame.PLAYER_SPRITE+'.png', 64, 64);
-    // this.load.audio('explosion', ['assets/explosion.ogg', 'assets/explosion.wav']);
-    // this.load.audio('playerExplosion', ['assets/player-explosion.ogg', 'assets/player-explosion.wav']);
-    // this.load.audio('enemyFire', ['assets/enemy-fire.ogg', 'assets/enemy-fire.wav']);
-    // this.load.audio('playerFire', ['assets/player-fire.ogg', 'assets/player-fire.wav']);
-    // this.load.audio('powerUp', ['assets/powerup.ogg', 'assets/powerup.wav']);
-    // //this.load.audio('titleMusic', ['audio/main_menu.mp3']);
-
-    // },
-
     /* Creates the game objects (ideally with already loaded assets) */
     create: function () {
 
-        this.setupBackground();
-        this.setupPlayer();
-        this.setupEnemies();
-        this.setupBullets();
-        this.setupExplosions();
-        this.setupPlayerIcons();
-        this.setupText();
-
-        this.setupAudio();
-
-        // Implement keyboard control with arrow keys
-        this.cursors = this.input.keyboard.createCursorKeys();
+//        this.setupBackground();
+//        this.setupPlayer();
+//        this.setupEnemies();
+//        this.setupBullets();
+//        this.setupExplosions();
+//        this.setupPlayerIcons();
+//        this.setupText();
+//
+//        this.setupAudio();
+//
+//        // Implement keyboard control with arrow keys
+//        this.cursors = this.input.keyboard.createCursorKeys();
 
     },
 
+    /* Runs the game loop until told to do otherwise */
     update: function () {
-        this.checkCollisions();
-        this.spawnEnemies();
-        this.enemyFire();
-        this.processPlayerInput();
-        this.processDelayedEffects();
+//      
+//        this.checkCollisions();
+//        this.spawnEnemies();
+//        this.enemyFire();
+//        this.processPlayerInput();
+//        this.processDelayedEffects();
     },
 
 
@@ -77,11 +46,11 @@ BasicGame.Game.prototype = {
     //
 
     setupAudio: function () {
-        this.explosionSFX = this.add.audio('explosion');
-        this.playerExplosionSFX = this.add.audio('playerExplosion');
-        this.enemyFireSFX = this.add.audio('enemyFire');
-        this.playerFireSFX = this.add.audio('playerFire');
-        this.powerUpSFX = this.add.audio('powerUp');
+        // this.explosionSFX = this.add.audio('explosion');
+        // this.playerExplosionSFX = this.add.audio('playerExplosion');
+        // this.enemyFireSFX = this.add.audio('enemyFire');
+        // this.playerFireSFX = this.add.audio('playerFire');
+        // this.powerUpSFX = this.add.audio('powerUp');
     },
 
     setupBackground: function () {
@@ -387,7 +356,7 @@ BasicGame.Game.prototype = {
                     bullet, this.player, BasicGame.ENEMY_BULLET_VELOCITY
                 );
                 enemy.nextShotAt = this.time.now + BasicGame.SHOOTER_SHOT_DELAY;
-                this.enemyFireSFX.play();
+                // this.enemyFireSFX.play();
             }
         }, this);
 
@@ -397,7 +366,7 @@ BasicGame.Game.prototype = {
 
             this.boss.nextShotAt = this.time.now + BasicGame.BOSS_SHOT_DELAY;
 
-            this.enemyFireSFX.play();
+            // this.enemyFireSFX.play();
 
 
             for (var i = 0; i < 5; i++) {
@@ -528,7 +497,7 @@ BasicGame.Game.prototype = {
             return;
         }
 
-        this.playerExplosionSFX.play();
+        // this.playerExplosionSFX.play();
 
         // Crashing into an enemy only deals 5 damage
         this.damageEnemy(enemy, BasicGame.CRASH_DAMAGE);
@@ -552,7 +521,7 @@ BasicGame.Game.prototype = {
             enemy.play('hit');
         } else {
             this.explode(enemy);
-            this.explosionSFX.play();
+            // this.explosionSFX.play();
             this.spawnPowerUp(enemy);
             this.addToScore(enemy.reward);
             // We check the sprite key (e.g. 'greenEnemy') to see if the sprite is a boss
@@ -582,7 +551,7 @@ BasicGame.Game.prototype = {
     playerPowerUp: function (player, powerUp) {
         this.addToScore(powerUp.reward);
         powerUp.kill();
-        this.powerUpSFX.play();
+        // this.powerUpSFX.play();
         if (this.weaponLevel < 5) {
             this.weaponLevel++;
         }
@@ -603,7 +572,7 @@ BasicGame.Game.prototype = {
         }
 
         this.nextShotAt = this.time.now + this.shotDelay;
-        this.playerFireSFX.play();
+        // this.playerFireSFX.play();
 
         var bullet;
         if (this.weaponLevel === 0) {
