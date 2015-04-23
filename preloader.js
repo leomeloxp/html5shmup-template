@@ -26,18 +26,19 @@ BasicGame.Preloader.prototype = {
     // Let's load the homepage before moving on to the other assets.
     this.load.image('titlepage', 'assets/titlepage.png');
 
-//    // Here we load the rest of the assets our game needs.
-//    // Phase 1 assets
-//    this.load.image('sea', 'assets/sea.png');
-//    this.load.spritesheet('player', 'assets/player'+BasicGame.PLAYER_SPRITE+'.png', 64, 64);
-//    this.load.spritesheet('greenEnemy', 'assets/enemy.png', 32, 32);
-//    this.load.spritesheet('whiteEnemy', 'assets/shooting-enemy.png', 32, 32);
-//    this.load.image('bullet', 'assets/bullet.png');
-//    this.load.spritesheet('explosion', 'assets/explosion.png', 32, 32);
-//    this.load.image('enemyBullet', 'assets/enemy-bullet.png');
+   // Here we load the rest of the assets our game needs.
+   // Phase 1 assets
+   this.load.image('sea', 'assets/sea.png');
+   this.load.spritesheet('player', 'assets/player'+BasicGame.PLAYER_SPRITE+'.png', 64, 64);
+   this.load.spritesheet('greenEnemy', 'assets/enemy.png', 32, 32);
+   this.load.spritesheet('whiteEnemy', 'assets/shooting-enemy.png', 32, 32);
+   this.load.image('bullet', 'assets/bullet.png');
+   this.load.spritesheet('explosion', 'assets/explosion.png', 32, 32);
+   this.load.image('enemyBullet', 'assets/enemy-bullet.png');
+   this.load.image('powerup1', 'assets/powerup1.png');
+   
 //    
 //    // Phase 2 assets
-//    this.load.image('powerup1', 'assets/powerup1.png');
 //    this.load.spritesheet('boss', 'assets/boss.png', 93, 75);
 //    
 //    // Phase 3 assets

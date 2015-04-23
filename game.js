@@ -3,33 +3,34 @@ BasicGame.Game = function (game) {
 };
 
 BasicGame.Game.prototype = {
-    
+
     /* Creates the game objects (ideally with already loaded assets) */
     create: function () {
 
-//        this.setupBackground();
-//        this.setupPlayer();
-//        this.setupEnemies();
-//        this.setupBullets();
-//        this.setupExplosions();
-//        this.setupPlayerIcons();
-//        this.setupText();
-//
-//        this.setupAudio();
-//
-//        // Implement keyboard control with arrow keys
-//        this.cursors = this.input.keyboard.createCursorKeys();
+        // this.setupBackground();
+        // this.setupPlayer();
+        // this.setupEnemies();
+        // this.setupBullets();
+        // this.setupExplosions();
+        // this.setupPlayerIcons();
+        // this.setupText();
+        // this.setupBoss();
+
+        // this.setupAudio();
+
+        // // Implement keyboard control with arrow keys
+        this.cursors = this.input.keyboard.createCursorKeys();
 
     },
 
     /* Runs the game loop until told to do otherwise */
     update: function () {
-//      
-//        this.checkCollisions();
-//        this.spawnEnemies();
-//        this.enemyFire();
-//        this.processPlayerInput();
-//        this.processDelayedEffects();
+
+        // this.processPlayerInput();
+        // this.spawnEnemies();
+        // this.checkCollisions();
+        // this.enemyFire();
+        // this.processDelayedEffects();
     },
 
 
@@ -41,16 +42,16 @@ BasicGame.Game.prototype = {
 
     },
 
-    //
-    // create() - related functions
-    //
+    /*
+    create() - related functions
+    */
 
     setupAudio: function () {
-        // this.explosionSFX = this.add.audio('explosion');
-        // this.playerExplosionSFX = this.add.audio('playerExplosion');
-        // this.enemyFireSFX = this.add.audio('enemyFire');
-        // this.playerFireSFX = this.add.audio('playerFire');
-        // this.powerUpSFX = this.add.audio('powerUp');
+        this.explosionSFX = this.add.audio('explosion');
+        this.playerExplosionSFX = this.add.audio('playerExplosion');
+        this.enemyFireSFX = this.add.audio('enemyFire');
+        this.playerFireSFX = this.add.audio('playerFire');
+        this.powerUpSFX = this.add.audio('powerUp');
     },
 
     setupBackground: function () {
@@ -132,7 +133,9 @@ BasicGame.Game.prototype = {
         // Start Spawning Shooters 5 seconds after game starts
         this.nextShooterAt = this.time.now + Phaser.Timer.SECOND * 5;
         this.shooterDelay = BasicGame.SPAWN_SHOOTER_DELAY;
+    },
 
+    setupBoss: function () {
         this.bossPool = this.add.group();
         this.bossPool.enableBody = true;
         this.bossPool.physicsBodyType = Phaser.Physics.ARCADE;
@@ -245,9 +248,9 @@ BasicGame.Game.prototype = {
         this.scoreText.anchor.setTo(0.5, 0.5);
     },
 
-    //
-    // update() - related functions
-    //
+    /*
+    update() - related functions
+    */
     checkCollisions: function () {
         // Collision handling between enemy and bullet
         this.physics.arcade.overlap(
@@ -306,10 +309,10 @@ BasicGame.Game.prototype = {
         }
 
         if (this.nextShooterAt < this.time.now && this.shooterPool.countDead() > 0) {
-            if ( this.bossPool.countDead() === 0) {
-                //Won't spawn shooters if the boss is alive
-                return;
-            };
+            // //Won't spawn shooters if the boss is alive
+            // if ( this.bossPool.countDead() === 0) {
+            //     return;
+            // };
 
 
             this.nextShooterAt = this.time.now + this.shooterDelay;
@@ -359,7 +362,9 @@ BasicGame.Game.prototype = {
                 // this.enemyFireSFX.play();
             }
         }, this);
+    },
 
+    bossFire: function() {
         if (this.bossApproaching === false && this.boss.alive &&
             this.boss.nextShotAt < this.time.now &&
             this.enemyBulletPool.countDead() >= 10) {
@@ -409,26 +414,12 @@ BasicGame.Game.prototype = {
         } else if (this.cursors.right.isDown) {
             this.player.body.velocity.x = this.player.speed;
         }
-        // Horizontal Move AD
-        if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
-            this.player.body.velocity.x = -this.player.speed;
-        } else if (this.input.keyboard.isDown(Phaser.Keyboard.D)) {
-            this.player.body.velocity.x = this.player.speed;
-        }
-
         // Vertical Move Arrows
         if (this.cursors.up.isDown) {
             this.player.body.velocity.y = -this.player.speed;
         } else if (this.cursors.down.isDown) {
             this.player.body.velocity.y = this.player.speed;
         }
-        // Vertical Move WS
-        if (this.input.keyboard.isDown(Phaser.Keyboard.W)) {
-            this.player.body.velocity.y = -this.player.speed;
-        } else if (this.input.keyboard.isDown(Phaser.Keyboard.S)) {
-            this.player.body.velocity.y = this.player.speed;
-        }
-
         // Implement Mouse and Touch movement
         if (this.input.activePointer.isDown &&
             this.physics.arcade.distanceToPointer(this.player) > 15) { //Fixes trembling sprite caused by movement overshoot
@@ -436,15 +427,16 @@ BasicGame.Game.prototype = {
             this.physics.arcade.moveToPointer(this.player, this.player.speed);
         }
 
-        if ((this.input.keyboard.isDown(Phaser.Keyboard.Z) ||
-            this.input.activePointer.isDown) || 
-            (this.input.keyboard.isDown(Phaser.Keyboard.K))) {
-            if (this.returnText && this.returnText.exists) {
-                this.quitGame();
-            } else {
-                this.fire();
-            }
-        }
+        // // Player firing code
+        // if ((this.input.keyboard.isDown(Phaser.Keyboard.Z) ||
+        //     this.input.activePointer.isDown) ||
+        //     (this.input.keyboard.isDown(Phaser.Keyboard.K))) {
+        //     if (this.returnText && this.returnText.exists) {
+        //         this.quitGame();
+        //     } else {
+        //         this.fire();
+        //     }
+        // }
     },
 
     processDelayedEffects: function () {
@@ -467,17 +459,17 @@ BasicGame.Game.prototype = {
             this.showReturn = false;
         }
 
-        if (this.bossApproaching && this.boss.y > 80) {
-            this.bossApproaching = false;
-            this.boss.nextShotAt = 0;
+        // if (this.bossApproaching && this.boss.y > 80) {
+        //     this.bossApproaching = false;
+        //     this.boss.nextShotAt = 0;
 
-            this.boss.body.velocity.y = 0;
-            this.boss.body.velocity.x = BasicGame.BOSS_X_VELOCITY;
+        //     this.boss.body.velocity.y = 0;
+        //     this.boss.body.velocity.x = BasicGame.BOSS_X_VELOCITY;
 
-            // Allow bouncing off world bounds
-            this.boss.body.bounce.x = 1;
-            this.boss.body.collideWorldBounds = true;
-        };
+        //     // Allow bouncing off world bounds
+        //     this.boss.body.bounce.x = 1;
+        //     this.boss.body.collideWorldBounds = true;
+        // };
     },
 
     //
@@ -531,7 +523,7 @@ BasicGame.Game.prototype = {
                 this.shooterPool.destroy();
                 this.bossPool.destroy();
                 this.enemyBulletPool.destroy();
-                this.displayEnd(true);
+                // this.displayEnd(true);
             }
         }
     },
